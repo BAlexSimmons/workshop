@@ -45,8 +45,45 @@ benthic
 ```
 
 
+```{r}
+summary(benthic)
+
+skimr::skim(benthic)
+
+unique(benthic$id_name)
+
+ggplot(benthic, aes(date, fill = id_name)) +
+  geom_bar()
+
+```
 
 
+Buoy Data (import at .txt file for your data)
+
+```{r}
+
+buoy <- readr::read_table2(buoy_url)
+head(buoy)
+
+```
+
+#Wrangle
+
+```{r}
+#overwrite column names
+names(buoy) <- str_c(
+  names(buoy),
+  buoy %>% filter(`#YY` == "#yr"),
+  sep = "_")
+
+names(buoy) <- str_replace_all(names(buoy), "#", "")  # replace `#` with nothing 
+names(buoy) <- str_replace_all(names(buoy), "/", "_") # replace `/` with `_`
+
+#remove redundant row
+buoy <- buoy %>%
+  filter(YY_yr != "#yr")
+
+```
 
 
 
