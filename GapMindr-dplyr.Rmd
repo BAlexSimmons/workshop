@@ -1,0 +1,37 @@
+---
+title: "GapMinder-dplyr"
+author: "Blake"
+date: "19/06/2019"
+output: html_document
+---
+
+Loading tidyverse
+
+```{r}
+library(tidyverse)
+```
+
+Load data
+
+```{r}
+gapminder <- read_csv("https://raw.githubusercontent.com/OHI-Science/data-science-training/master/data/gapminder.csv")
+```
+
+
+Filter function
+
+```{r}
+filter(gapminder, lifeExp < 29)
+
+filter(gapminder, country == "Mexico")
+
+filter(gapminder, country %in% c("Mexico", "Peru"))
+
+filter(gapminder, country == "Mexico", year == 2002)
+
+x <- filter(gapminder, country == "Brazil", year > 1986)  
+mean(x$lifeExp)  
+
+
+```
+
