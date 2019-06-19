@@ -80,9 +80,48 @@ gapminder %>%
 
 ```
 
+Group By function
 
+```{r}
 
+gapminder %>%
+  filter(year == 2002) %>%
+  group_by(continent) %>% 
+  mutate(cont_pop = sum(pop))
 
+```
+
+Add in Summarize function
+
+```{r}
+
+gapminder %>%
+  filter(year == 2002) %>%
+  group_by(continent) %>% 
+  summarize(cont_pop = sum(pop))
+
+gapminder %>%
+  group_by(continent, year) %>% 
+  summarize(cont_pop = sum(pop))
+
+```
+
+Arrange function (orders columns)
+
+```{r}
+
+gapminder %>%
+  group_by(continent, year) %>%
+  summarize(cont_pop = sum(pop)) %>%
+  arrange(year)
+
+gapminder %>%
+  mutate(gdp = pop * gdpPercap) %>%
+  group_by(continent) %>%
+  mutate(max_gdp = max(gdp)) %>%
+  filter(gdp == max_gdp)
+
+```
 
 
 
