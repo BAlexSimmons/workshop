@@ -18,7 +18,7 @@ gapminder <- read_csv("https://raw.githubusercontent.com/OHI-Science/data-scienc
 ```
 
 
-Filter function
+Filter function (operates on rows)
 
 ```{r}
 filter(gapminder, lifeExp < 29)
@@ -32,6 +32,60 @@ filter(gapminder, country == "Mexico", year == 2002)
 x <- filter(gapminder, country == "Brazil", year > 1986)  
 mean(x$lifeExp)  
 
+```
+
+
+Select function (operates on columns)
+
+```{r}
+select(gapminder, year, country, lifeExp)
+
+select(gapminder, -continent, -gdpPercap)
 
 ```
+
+Select and filter together
+
+```{r}
+
+gap_cambodia <- filter(gapminder, country =="Cambodia")
+gap_cambodia2 <- select(gap_cambodia, -continent, -lifeExp)
+
+```
+
+Piping #andthen (%>%, CMD+SHIFT+M)
+
+```{r}
+
+gapminder %>% head()
+head(gapminder)
+
+gap_cambodia <- gapminder %>% 
+  filter(country =="Cambodia") %>% 
+  select(-continent, -lifeExp)
+
+```
+
+Mutate function (adds a new column)
+
+```{r}
+
+gapminder %>% 
+  mutate(gdp = pop * gdpPercap)
+
+gapminder %>%
+  filter(continent == "Asia",
+         year == 2007) %>%
+  mutate(pop_thousands = pop/1000)
+
+```
+
+
+
+
+
+
+
+
+
 
